@@ -1,0 +1,76 @@
+/* ===========================================================
+   QuestionRy — neobrutalism.css
+   Tactile buttons, hard shadows, sharp geometry.
+   =========================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font-size: var(--text-md);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 0;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); text-decoration: none; }
+.btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: var(--shadow-sm); }
+
+.btn .ic { width: 1.05em; height: 1.05em; }
+
+.btn--primary { background: var(--violet); color: #fff; border-color: var(--ink); }
+.btn--primary:hover { background: var(--violet-dark); }
+
+.btn--secondary { background: var(--paper); color: var(--ink); }
+
+.btn--accent { background: var(--amber); }
+.btn--accent:hover { background: var(--amber-dark); }
+
+.btn--mint { background: var(--mint); }
+.btn--mint:hover { background: var(--mint-dark); }
+
+.btn--danger { background: var(--rose); color: #fff; }
+.btn--danger:hover { background: var(--rose-dark); }
+
+.btn--ghost {
+  background: transparent;
+  box-shadow: none;
+  border: 3px solid transparent;
+  color: var(--ink-soft);
+}
+.btn--ghost:hover { border-color: var(--ink); box-shadow: var(--shadow-sm); background: var(--paper); }
+
+/* sizes */
+.btn--sm { padding: 8px 12px; font-size: var(--text-sm); border-width: 2px; border-radius: 8px; box-shadow: 3px 3px 0 var(--ink); }
+.btn--lg { padding: 14px 26px; font-size: var(--text-lg); }
+.btn--block { width: 100%; }
+
+/* icon-only button */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.icon-btn:hover { transform: translate(-1px, -1px); }
+.icon-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+.icon-btn .ic { width: 18px; height: 18px; }

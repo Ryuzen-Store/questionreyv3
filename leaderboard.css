@@ -1,0 +1,74 @@
+/* ===========================================================
+   QuestionRy — leaderboard.css
+   =========================================================== */
+
+.leaderboard__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  color: var(--mint-dark);
+  margin-bottom: 12px;
+}
+.live-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--mint-dark);
+  border: 2px solid var(--ink);
+  animation: pulse-dot 1.6s ease infinite;
+}
+
+.lb {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lb__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  min-width: 0;
+}
+.lb__rank {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  font-family: var(--font-head);
+  font-size: var(--text-md);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--bg-soft);
+}
+.lb__rank--gold { background: var(--amber-bg); }
+.lb__rank--silver { background: #E8EEF2; }
+.lb__rank--bronze { background: #F3E3D6; }
+.lb__tag {
+  flex: 1;
+  min-width: 0;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lb__score { font-size: var(--text-lg); color: var(--violet-dark); }
+.lb__self {
+  margin-top: 12px;
+  padding: 10px 14px;
+  text-align: center;
+  font-weight: 700;
+  background: var(--violet-bg);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+}

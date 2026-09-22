@@ -1,0 +1,55 @@
+/* ===========================================================
+   QuestionRy — profile.css (profile + settings)
+   =========================================================== */
+
+.profile-card { text-align: center; padding: 26px 18px; }
+.profile-card__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px; height: 84px;
+  margin-bottom: 12px;
+  font-family: var(--font-head);
+  font-size: 2.4rem;
+  color: #fff;
+  background: var(--violet);
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  border-radius: 16px;
+}
+.profile-card h2 { font-size: var(--text-xl); }
+.profile-card__email { color: var(--muted); font-size: var(--text-sm); margin-bottom: 8px; word-break: break-word; }
+
+.profile-info { padding: 16px; }
+.profile-info h3, .tag-form h3, .settings-card h2 { font-size: var(--text-lg); margin-bottom: 10px; }
+.profile-info__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 2px solid var(--bg-soft);
+  font-size: var(--text-sm);
+}
+.profile-info__row:last-child { border-bottom: none; }
+.profile-info__row strong { text-align: right; word-break: break-word; }
+
+.tag-form { padding: 16px; }
+
+/* ---------- settings ---------- */
+.settings-card { padding: 16px; }
+.settings-card .btn { margin-top: 10px; width: 100%; }
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 2px solid var(--bg-soft);
+  font-size: var(--text-sm);
+}
+.settings-row:last-child { border-bottom: none; }
+.settings-row strong { text-align: right; word-break: break-word; }
+.settings-about p { font-size: var(--text-sm); color: var(--ink-soft); }
+
+.profile-info--identity { margin-top: 14px; text-align: left; padding: 14px; }
+.profile-info--identity .profile-info__row { padding: 10px 0; }
+.profile-info--identity .profile-info__row strong { max-width: 62%; }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="QuestionRy Logo">
+  <!-- Neobrutalist logo: hard shadow, thick borders, violet + yellow accent -->
+  <rect x="18" y="18" width="96" height="96" fill="#12110F" rx="4"/>
+  <rect x="10" y="10" width="96" height="96" fill="#FFFFFF" stroke="#12110F" stroke-width="6" rx="4"/>
+  <rect x="26" y="26" width="64" height="64" fill="#7C3AED" rx="2"/>
+  <text x="58" y="76" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="800" fill="#FFFFFF" text-anchor="middle">Q</text>
+  <rect x="104" y="18" width="10" height="10" fill="#FBBF24" stroke="#12110F" stroke-width="2"/>
+  <path d="M22 22 L34 34" stroke="#12110F" stroke-width="0" />
+  <circle cx="98" cy="98" r="8" fill="#2DD4BC" stroke="#12110F" stroke-width="3"/>
+</svg>

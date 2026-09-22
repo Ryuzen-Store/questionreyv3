@@ -1,0 +1,98 @@
+/* ===========================================================
+   QuestionRy — responsive.css
+   Mobile-first responsive rules. NO fixed device widths.
+   =========================================================== */
+
+/* ---------- bottom navigation ---------- */
+.app-nav { display: block; }
+
+.bottom-nav {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  display: flex;
+  align-items: stretch;
+  background: var(--paper);
+  border-top: var(--border);
+  padding-bottom: env(safe-area-inset-bottom);
+  max-width: 100%;
+}
+.bottom-nav__item {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 2px;
+  color: var(--ink-soft);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-decoration: none;
+  border-right: 2px solid var(--ink);
+}
+.bottom-nav__item:last-child { border-right: none; }
+.bottom-nav__item .ic { width: 20px; height: 20px; }
+.bottom-nav__item.is-active { background: var(--violet-bg); color: var(--violet-dark); }
+.bottom-nav__item--primary { background: var(--violet); color: #fff; }
+.bottom-nav__item--primary.is-active { background: var(--violet-dark); color: #fff; }
+.bottom-nav__label { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* header menu button (mobile) */
+.header__toggle { display: inline-flex; }
+
+/* Wide screens: bottom nav centers like an app */
+@media (min-width: 768px) {
+  .bottom-nav {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    bottom: 12px;
+    border: var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .bottom-nav__item { border-right: 2px solid var(--ink); }
+  .container { padding-bottom: 108px; }
+  .grid-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* hide brand full name on very narrow screens */
+@media (max-width: 359px) {
+  .header__name { display: none; }
+  .header__logo { display: flex; }
+}
+
+/* admin table -> cards on mobile */
+@media (max-width: 640px) {
+  .admin-table-wrap { display: none; }
+  .admin-cards { display: grid; gap: 10px; }
+}
+@media (min-width: 641px) {
+  .admin-cards { display: none; }
+  .admin-table-wrap { display: block; overflow-x: auto; }
+}
+
+/* history layout: header row hidden on mobile, cards style */
+@media (max-width: 640px) {
+  .history__header { display: none; }
+  .history__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+  .history__row span { min-width: 40%; }
+  .history__row span::before {
+    content: attr(data-label) ": ";
+    font-weight: 700;
+    color: var(--muted);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+  }
+}
+
+/* Bottom navigation removed in the simplified user UI. */
+#app-nav { display: none !important; }
