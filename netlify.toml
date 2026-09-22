@@ -1,0 +1,48 @@
+# QuestionRy Multi Quest — Netlify configuration
+# Static site: no build step required. Files are served from the publish
+# directory exactly as they exist in the repository.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Same-origin AI proxy routes. The browser never needs CORS access to api-faa.my.id;
+# these routes invoke Netlify Functions, which call the three FAA endpoints server-side.
+[[redirects]]
+  from = "/api/ai/deep-ai"
+  to = "/.netlify/functions/deep-ai"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/ai/blackbox"
+  to = "/.netlify/functions/blackbox"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/ai/claude-ai"
+  to = "/.netlify/functions/claude-ai"
+  status = 200
+  force = true
+
+# Global redirect rules (SPA fallback):
+#  1) Known static files (assets/css/js) are never rewritten.
+#  2) The hash router (#/quiz etc.) never hits the server, so nothing to do.
+#  3) Direct paths (/, /woiapaitujir, /dashboard...) fall back to / for
+#     client-side handling. /woiapaitujir itself returns HTTP 200 so it opens
+#     correctly when visited directly.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Text assets should be served with correct types/caching.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[build.environment]
+  NODE_VERSION = "20"

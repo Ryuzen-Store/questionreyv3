@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- ============ PRIMARY META / SEO ============ -->
+  <title>QuestionRy Multi Quest — Tantangan Kuis Dinamis &amp; Realtime</title>
+  <meta name="description" content="Uji pengetahuanmu di QuestionRy Multi Quest. Kerjakan soal dinamis, kumpulkan skor, dan pelajari pembahasannya.">
+  <meta name="application-name" content="QuestionRy Multi Quest">
+  <meta name="theme-color" content="#7C3AED">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#7C3AED">
+
+  <!-- ============ OPEN GRAPH (WhatsApp / Telegram / Facebook / Discord) ============ -->
+  <meta property="og:site_name" content="QuestionRy">
+  <meta property="og:title" content="QuestionRy Multi Quest">
+  <meta property="og:description" content="Platform kuis interaktif dengan berbagai mata pelajaran, level tantangan, leaderboard, dan pembahasan soal.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="https://cdn.nekohime.site/file/wv9vhp3k.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="QuestionRy Multi Quest — Tantangan Kuis Dinamis & Realtime">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- ============ TWITTER / X ============ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuestionRy Multi Quest">
+  <meta name="twitter:description" content="Platform kuis interaktif dengan berbagai mata pelajaran, level tantangan, leaderboard, dan pembahasan soal.">
+  <meta name="twitter:image" content="https://cdn.nekohime.site/file/wv9vhp3k.png">
+
+  <!-- ============ INDEXING ============ -->
+  <meta name="robots" content="index, follow">
+
+  <!-- ============ ICONS ============ -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="./assets/images/favicon-64.png">
+  <link rel="apple-touch-icon" href="./assets/images/favicon-64.png">
+
+  <!-- ============ FONTS (system stack, no blocking network fetch) ============ -->
+  <style>
+    /* System font stack keeps the site fast and offline-tolerant. */
+    body{font-family:'Inter','Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif;}
+    h1,h2,h3,h4,.font-brand{font-family:'Archivo Black','Arial Black','Inter',system-ui,sans-serif;}
+  </style>
+
+  <!-- ============ STYLES ============ -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/neobrutalism.css">
+  <link rel="stylesheet" href="./css/animations.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/auth.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <link rel="stylesheet" href="./css/result.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/leaderboard.css">
+  <link rel="stylesheet" href="./css/profile.css">
+  <link rel="stylesheet" href="./css/admin.css">
+
+  <!-- Icon sprite is fetched and injected inline by js/components/icons.js so
+       <use href="#i-..."> references resolve in the same document. -->
+  <link rel="preload" as="fetch" href="./assets/icons/questionry-icons.svg" fetchpriority="low">
+</head>
+<body>
+  <div id="app">
+    <!-- Header (sticky): brand / server status / nav — injected by components/header.js -->
+    <header id="app-header"></header>
+
+    <main id="app-main" class="app-main" tabindex="-1">
+      <!-- Views are rendered here by the router -->
+      <section id="view" class="view" aria-live="polite"></section>
+    </main>
+
+    <!-- Bottom navigation host (rendered by components/navigation.js) -->
+    <div id="app-nav" class="app-nav"></div>
+
+    <footer id="app-footer" class="app-footer"></footer>
+  </div>
+
+  <!-- Modal, toast and loading hosts -->
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="assertive"></div>
+  <div id="loading-root"></div>
+  <div id="overlay-root" class="overlay-root"></div>
+
+  <!-- ============ APP BOOT ============ -->
+  <!-- Supabase is loaded as a classic UMD script so window.supabase is available
+       to the existing modular application. If the CDN is unavailable, the app
+       still boots in local/offline mode instead of freezing on a blank screen. -->
+  <script>
+    (function () {
+      var appStarted = false;
+      var timeoutId;
+      function startApp() {
+        if (appStarted) return;
+        appStarted = true;
+        clearTimeout(timeoutId);
+        var script = document.createElement('script');
+        script.type = 'module';
+        script.src = '/js/app.js';
+        script.onerror = function () {
+          var box = document.getElementById('boot-error');
+          if (box) {
+            box.hidden = false;
+            box.querySelector('[data-error]').textContent =
+              'JavaScript aplikasi gagal dimuat. Periksa path file dan deploy ulang.';
+          }
+        };
+        document.body.appendChild(script);
+      }
+
+      function loadSupabase() {
+        if (window.supabase && typeof window.supabase.createClient === 'function') {
+          startApp();
+          return;
+        }
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        s.crossOrigin = 'anonymous';
+        s.onload = startApp;
+        s.onerror = startApp;
+        document.head.appendChild(s);
+        // Never block the application indefinitely on a third-party CDN.
+        timeoutId = setTimeout(startApp, 5000);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadSupabase, { once: true });
+      } else {
+        loadSupabase();
+      }
+    })();
+  </script>
+  <div id="boot-error" hidden style="font-family:system-ui,sans-serif;max-width:480px;margin:24px auto;padding:20px;border:4px solid #111;box-shadow:8px 8px 0 #111;background:#fff">
+    <strong>QuestionRy gagal dimuat</strong>
+    <p data-error>Terjadi kesalahan saat memulai aplikasi.</p>
+    <button type="button" onclick="location.reload()">MUAT ULANG</button>
+  </div>
+  <noscript>
+    <div style="font-family:sans-serif;max-width:640px;margin:80px auto;padding:24px;border:3px solid #12110F;box-shadow:8px 8px 0 #12110F;background:#fff">
+      <h1>QuestionRy Multi Quest</h1>
+      <p>Aplikasi ini membutuhkan JavaScript. Aktifkan JavaScript di browser Anda untuk bermain kuis.</p>
+    </div>
+  </noscript>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js", { scope: "/" })
+          .then(() => console.log("QuestionRy PWA siap"))
+          .catch((err) => console.warn("PWA gagal didaftarkan", err));
+      });
+    }
+  </script>
+
+</body>
+</html>

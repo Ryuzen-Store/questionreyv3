@@ -1,0 +1,4 @@
+# QuestionRy Multi Quest — SPA fallback for hosts that do not parse netlify.toml.
+# Every route that is not a real file on disk is served as index.html so the
+# client-side hash router can take over. /jekijink233 and /woiapaitujir stay directly openable.
+/*    /index.html   200
